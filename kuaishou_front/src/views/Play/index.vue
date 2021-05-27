@@ -174,7 +174,12 @@ export default {
             message: "评论成功",
             type: "success",
           });
-          this.$router.go(0);
+          let newComment = {
+            nickname: window.sessionStorage.getItem("LoginUserNickname"),
+            avatarUrl: sessionStorage.getItem("LoginUserAvatar"),
+            comment: this.comment,
+          }
+          this.comments.unshift(newComment);
           this.comment = "";
         });
     },

@@ -71,7 +71,7 @@ router.post('/getAllVideos', (req, res) => {
                 return res.status(200).json({
                     code: 200,
                     msg: '视频库获取成功!',
-                    data: searchSortResult
+                    data: searchSortResult.reverse()
                 });
             }
         })
@@ -98,7 +98,7 @@ router.post('/getMyVideos' , (req,res) => {
                 return res.status(200).json({
                     code: 200,
                     msg: '视频库获取成功!',
-                    data: results,
+                    data: results.reverse(),
                 });
             }
         })

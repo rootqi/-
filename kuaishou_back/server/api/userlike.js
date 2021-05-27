@@ -77,7 +77,7 @@ router.post('/getMyLike', (req, res) => {
                 return res.status(200).json({
                     code: 200,
                     msg: '视频库获取成功!',
-                    data: results,
+                    data: results.reverse(),
                 });
             }
         })
