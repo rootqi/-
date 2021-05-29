@@ -6,8 +6,9 @@
         v-for="(item, index) in currentPageVideoList"
         :key="index"
       >
-        <el-card :body-style="{ padding: '0px' }">
-          <video
+        <el-card :body-style="{ padding: '10px'}" shadow="hover" >
+          <div style="text-align: center">
+            <video
             width="350"
             height="250"
             @click="
@@ -22,6 +23,7 @@
             ref="video"
             :src="item.videoUrl"
           ></video>
+          </div>
           <div style="padding: 14px" id="describe">
             <span>{{ item.videoTitle }}</span>
             <div class="bottom clearfix">
@@ -67,7 +69,7 @@ export default {
       return false;
     }else {
        axios
-      .post("http://127.0.0.1:3000/api/user/getUser/", {
+      .post("http://192.168.1.101:3000/api/user/getUser/", {
         userID: localStorage.getItem("access_token"),
       })
       .then((res) => {
@@ -92,7 +94,7 @@ export default {
       console.log(videoSort);
     }
     axios
-      .post("http://127.0.0.1:3000/api/video/getAllVideos/", {
+      .post("http://192.168.1.101:3000/api/video/getAllVideos/", {
         search: this.search,
         videoSort: videoSort,
       })

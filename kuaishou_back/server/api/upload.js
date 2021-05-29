@@ -24,7 +24,7 @@ router.post('/uploadVideo',uploadVideo.single('file'),(req,res)=>{
                     code:200,
                     msg:'上传完成',
                     title:pathLib.parse(file.originalname).name,
-                    videoUrl:'http://127.0.0.1:3000/uploads/video/'+file.filename+pathLib.parse(file.originalname).ext
+                    videoUrl:'http://192.168.1.101:3000/uploads/video/'+file.filename+pathLib.parse(file.originalname).ext
                 })
             }
         })
@@ -56,7 +56,7 @@ router.post('/uploadAvatar',uploadAvater.single('file'),(req,res)=>{
                     code:200,
                     msg:'上传完成',
                     title:pathLib.parse(file.originalname).name,
-                    avatarUrl:'http://127.0.0.1:3000/uploads/avatar/'+file.filename+pathLib.parse(file.originalname).ext
+                    avatarUrl:'http://192.168.1.101:3000/uploads/avatar/'+file.filename+pathLib.parse(file.originalname).ext
                 })
             }
         })

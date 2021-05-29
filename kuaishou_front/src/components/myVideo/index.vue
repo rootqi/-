@@ -60,7 +60,7 @@ export default {
 
   mounted() {
     axios
-      .post("http://127.0.0.1:3000/api/video/getMyVideos", {
+      .post("http://192.168.1.101:3000/api/video/getMyVideos", {
         userID: window.localStorage.getItem("access_token"),
       })
       .then((res) => {

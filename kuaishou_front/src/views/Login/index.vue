@@ -221,7 +221,7 @@ export default {
         if (valid) {
           console.log(self.loginForm.userID);
           axios
-            .post("http://127.0.0.1:3000/api/user/login", {
+            .post("http://192.168.1.101:3000/api/user/login", {
               userID: self.loginForm.userID,
               password: self.loginForm.loginPassword,
             })
@@ -261,10 +261,10 @@ export default {
             s = s + (Math.floor(Math.random() * 10000) % 10).toString();
           }
           self.$http
-            .post("http://127.0.0.1:3000/api/user/register", {
+            .post("http://192.168.1.101:3000/api/user/register", {
               userID: s,
               password: self.registerForm.password,
-              avatarUrl: "http://127.0.0.1:3000/uploads/avatar/avatar1.jpg",
+              avatarUrl: "http://192.168.1.101:3000/uploads/avatar/avatar1.jpg",
               age: self.registerForm.age,
               email: self.registerForm.email,
               nickname: self.registerForm.nickname,

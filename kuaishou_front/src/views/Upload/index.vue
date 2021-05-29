@@ -46,7 +46,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">立即发布</el-button>
-          <el-button>取消</el-button>
+          <el-button @click="cancel">取消</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -59,7 +59,7 @@ export default {
   data() {
     return {
       limit: 1,
-      uploadUrl: "http://127.0.0.1:3000/api/upload/uploadVideo/",
+      uploadUrl: "http://192.168.1.101:3000/api/upload/uploadVideo/",
       videoUrl: "",
       form: {
         title: "",
@@ -104,7 +104,7 @@ export default {
         s = s + (Math.floor(Math.random() * 100000) % 10).toString();
       }
       axios
-        .post("http://127.0.0.1:3000/api/video/registerVideo/", {
+        .post("http://192.168.1.101:3000/api/video/registerVideo/", {
           userID: window.localStorage.getItem("access_token"),
           videoID: s,
           videoUrl: this.videoUrl,
@@ -147,10 +147,19 @@ export default {
       ) {
         this.$message.error("请将信息填写完整");
         return false;
-      } else {
+      } else if(this.form.title.length>20){
+        this.$message.error("标题长度过长，最多只能20个字");
+      } else if(this.form.desc.length>50){
+        this.$message.error("作品描述过长，最多只能50个字");
+      }
+      else {
         this.$refs["upload"].submit();
       }
     },
+
+    cancel(){
+      this.$router.go(-1);
+    }
   },
 };
 </script>

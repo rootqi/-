@@ -12,7 +12,8 @@ var sqlMap = {
 
     comment: {
         add: 'insert into comments (userID, avatarUrl, videoID, nickname, comment) values (?,?,?,?,?)',
-        select_allComments: 'select * from comments'
+        select_allComments: 'select * from comments',
+        update_comment: 'update comments set',
     },
 
     userlike: {

@@ -148,5 +148,33 @@ router.post('/updateUser', (req, res) => {
     })
 });
 
+//更新头像之后跟随更新评论
+router.post("/updateComment", (req, res) => {
+    var sql_update = $sql.comment.update_comment;
+    var params = req.body;
+    sql_update += " avatarUrl='" + params.avatarUrl +
+        "' where userID='" + params.userID + "'";
+    conn.query(sql_update, function (err, result) {
+        if (err) {
+            console.log(err);
+            return res.status(200).json({ //找不到用户
+                code: 404,
+                msg: '评论头像更新失败!'
+            });
+        }
+        if (result.affectedRows === undefined) {
+            return res.status(200).json({ //找不到用户
+                code: 400,
+                msg: '评论头像更新失败!'
+            });
+        } else {
+            return res.status(200).json({
+                code: 200,
+                msg: '评论头像更新成功!'
+            });
+        }
+    })
+})
+
 
 module.exports = router;

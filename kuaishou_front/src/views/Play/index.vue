@@ -38,7 +38,7 @@
           type="textarea"
           :rows="4"
           placeholder="说点什么..."
-          v-model="comment"
+          v-model.trim="comment"
         >
         </el-input>
         <div style="margin-top: 20px">
@@ -106,7 +106,7 @@ export default {
       } else if (this.ifLike == true) {
         console.log(this.videoUrl);
         axios
-          .post("http://127.0.0.1:3000/api/userlike/addUserLike", {
+          .post("http://192.168.1.101:3000/api/userlike/addUserLike", {
             userID: window.localStorage.getItem("access_token"),
             avatarUrl: window.sessionStorage.getItem("LoginUserAvatar"),
             nickname: window.sessionStorage.getItem("LoginUserNickname"),
@@ -126,7 +126,7 @@ export default {
           });
       } else {
         axios
-          .post("http://127.0.0.1:3000/api/userlike/deleteUserLike", {
+          .post("http://192.168.1.101:3000/api/userlike/deleteUserLike", {
             userID: window.localStorage.getItem("access_token"),
             videoID: this.videoID,
           })
@@ -142,6 +142,11 @@ export default {
     },
 
     toComment() {
+       if (localStorage.getItem("access_token") == null) {
+        this.$router.push("/login");
+        this.$message.error("请登录，无账号的话请注册哦, 亲");
+        return false;
+      }
       if (this.comment.length > 100) {
         this.$message({
           message: "说的太多了哦",
@@ -155,13 +160,9 @@ export default {
         });
         return false;
       }
-      if (localStorage.getItem("access_token") == null) {
-        this.$router.push("/login");
-        this.$message.error("请登录，无账号的话请注册哦, 亲");
-        return false;
-      }
+     
       axios
-        .post("http://127.0.0.1:3000/api/comment/addComment", {
+        .post("http://192.168.1.101:3000/api/comment/addComment", {
           userID: window.localStorage.getItem("access_token"),
           avatarUrl: sessionStorage.getItem("LoginUserAvatar"),
           videoID: this.videoID,
@@ -191,7 +192,7 @@ export default {
       this.ifLike = false;
     } else {
       axios
-        .post("http://127.0.0.1:3000/api/userlike/getIfMyLike", {
+        .post("http://192.168.1.101:3000/api/userlike/getIfMyLike", {
           userID: window.localStorage.getItem("access_token"),
           videoID: this.videoID,
         })
@@ -208,7 +209,7 @@ export default {
   beforeMount() {
     //搜索所有评论内容
     axios
-      .post("http://127.0.0.1:3000/api/comment/getAllComments", {
+      .post("http://192.168.1.101:3000/api/comment/getAllComments", {
         videoID: this.videoID,
       })
       .then((res) => {
@@ -220,7 +221,7 @@ export default {
   mounted() {
     //搜索视频用户数据
     axios
-      .post("http://127.0.0.1:3000/api/user/getUser/", {
+      .post("http://192.168.1.101:3000/api/user/getUser/", {
         userID: this.$route.query.userID,
       })
       .then((res) => {

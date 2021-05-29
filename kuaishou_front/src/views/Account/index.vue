@@ -46,7 +46,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">确认修改</el-button>
-          <el-button>取消</el-button>
+          <el-button @click="cancel">取消</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -57,13 +57,23 @@
 import axios from "axios";
 export default {
   data() {
+    var checkNickName = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入昵称"));
+      } else if(value.length>15) {
+        callback(new Error("昵称长度请不要大于15个字"));
+      }
+      else {
+        callback();
+      }
+    }
     var validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
       } else if (value.length < 8) {
         callback(new Error("密码长度不能小于8位"));
       } else if (value.length > 15) callback(new Error("密码长度不能大于15位"));
-        else callback();
+      else callback();
     };
     var validateDesc = (rule, value, callback) => {
       if (value === "") {
@@ -73,7 +83,7 @@ export default {
       } else callback();
     };
     return {
-      uploadUrl: "http://127.0.0.1:3000/api/upload/uploadAvatar/",
+      uploadUrl: "http://192.168.1.101:3000/api/upload/uploadAvatar/",
       avatarUrl: "",
       id: "",
       uploadForm: {
@@ -83,7 +93,7 @@ export default {
         aemail: "",
       },
       auploadRules: {
-        anickname: [{ required: true, message: "请输入昵称", trigger: "blur" }],
+        anickname: [{ validator: checkNickName, trigger: "blur" }],
         apassword: [{ validator: validatePass, trigger: "blur" }],
         adesc: [{ validator: validateDesc, trigger: "blur" }],
       },
@@ -114,9 +124,9 @@ export default {
     onSubmit() {
       this.$refs["uploadForm"].validate((valid) => {
         console.log(1111);
-        if(valid) {
+        if (valid) {
           axios
-            .post("http://127.0.0.1:3000/api/user/updateUser", {
+            .post("http://192.168.1.101:3000/api/user/updateUser", {
               userID: window.localStorage.getItem("access_token"),
               avatarUrl: this.avatarUrl,
               password: this.uploadForm.apassword,
@@ -135,12 +145,23 @@ export default {
           callback();
         }
       });
+
+      axios.post("http://192.168.1.101:3000/api/user/updateComment", {
+        userID: window.localStorage.getItem("access_token"),
+        avatarUrl: this.avatarUrl,
+      }).then((res) => {
+        console.log(res.data.msg);
+      })
     },
+
+    cancel(){
+      this.$router.go(-1);
+    }
   },
 
   mounted() {
     axios
-      .post("http://127.0.0.1:3000/api/user/getUser", {
+      .post("http://192.168.1.101:3000/api/user/getUser", {
         userID: window.localStorage.getItem("access_token"),
       })
       .then((res) => {
