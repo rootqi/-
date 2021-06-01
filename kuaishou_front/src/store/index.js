@@ -5,26 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    count:111,
-    search:"",
-    //定义路由表
-    routerlist:[]
+    profileUserID:"",
   },
 
   getters:{
-    getSearch(state){
-      return state.search;
-    }
   },
 
   mutations: {
-    //角色的路由表
-    rolerRouter(state,value){
-      state.routerlist = value
-    },
-
-    toSearch(state, tosearch){
-      state.search = tosearch;
+    //修改用户
+    setProfileUserID(state, val){
+      return (state.profileUserID = val);
     }
   },
   actions: {

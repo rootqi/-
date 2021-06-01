@@ -32,13 +32,13 @@
         <!-- 下拉框 -->
         <el-submenu index="5">
           <template slot="title"><i class="el-icon-info"></i></template>
-          <el-menu-item index="myVideo"
+          <el-menu-item @click="wayToAccount"
             ><i class="el-icon-user"></i>个人主页</el-menu-item
           >
           <el-menu-item index="account"
             ><i class="el-icon-setting"></i>账号设置</el-menu-item
           >
-          <el-menu-item index="login"  @click="logout"
+          <el-menu-item index="login" @click="logout"
             ><i class="el-icon-switch-button"></i>退出登录</el-menu-item
           >
         </el-submenu>
@@ -83,7 +83,9 @@
           </el-menu-item>
           <el-menu-item>
             <i class="el-icon-microphone"></i>
-            <span slot="title" @click="Search(sortForm.documentary)">纪录片</span>
+            <span slot="title" @click="Search(sortForm.documentary)"
+              >纪录片</span
+            >
           </el-menu-item>
           <el-menu-item>
             <i class="el-icon-potato-strips"></i>
@@ -130,31 +132,42 @@ export default {
         funny: "funny",
         tourism: "tourism",
         arts: "arts",
-      }
+      },
     };
   },
   methods: {
     // 退出按钮
     logout() {
       // 删除localStorage中保存的值
-      window.localStorage.removeItem('access_token');
-      window.sessionStorage.removeItem('searchItem')
+      window.localStorage.removeItem("access_token");
+      window.sessionStorage.removeItem("searchItem");
       this.$router.push("/login");
     },
     Search(sort) {
       let searchObj = {
         videoTitle: this.search,
-        videoSort: sort
+        videoSort: sort,
       };
-      let str = JSON.stringify(searchObj)
-      window.sessionStorage.setItem("searchItem",str);
-      if(this.$route.path == "/welcome"){
+      let str = JSON.stringify(searchObj);
+      window.sessionStorage.setItem("searchItem", str);
+      if (this.$route.path == "/welcome") {
         this.$router.go(0);
-      }else{
+      } else {
         this.$router.push("/welcome");
       }
-      this.search = '';
-    }
+      this.search = "";
+    },
+
+    wayToAccount() {
+      if (window.sessionStorage.getItem("userProfile") != null) {
+        window.sessionStorage.removeItem("userProfile");
+      }
+      window.sessionStorage.setItem(
+          "userProfile",
+          localStorage.getItem("access_token")
+        );
+        this.$router.go(0);
+    },
   },
 };
 </script>

@@ -60,7 +60,7 @@ export default {
 
   mounted(){
     axios.post("http://192.168.1.101:3000/api/userlike/getMyLike",{
-      userID: window.localStorage.getItem("access_token"),
+      userID: window.sessionStorage.getItem("userProfile"),
     }).then((res) => {
       if(res.data.code == 200){
       this.videoList = res.data.data;

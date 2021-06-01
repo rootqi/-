@@ -16,6 +16,7 @@
     <el-main>
       <div>
         <img
+          @click="wayToAccount"
           :src="avatarUrl"
           height="50"
           width="50"
@@ -183,6 +184,19 @@ export default {
           this.comments.unshift(newComment);
           this.comment = "";
         });
+    },
+
+    wayToAccount() {
+      if (window.sessionStorage.getItem("userProfile") != null) {
+        window.sessionStorage.removeItem("userProfile");
+      }
+      window.sessionStorage.setItem(
+          "userProfile",
+          this.userID
+        );
+      this.$router.push({
+        path: "/myVideo",
+      });
     },
   },
 
