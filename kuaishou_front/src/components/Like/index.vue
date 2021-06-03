@@ -14,7 +14,7 @@
                 item.videoUrl,
                 item.videoTitle,
                 item.videoDesc,
-                item.userID,
+                item.videoHolder,
                 item.videoID
               )
             "

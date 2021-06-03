@@ -13,7 +13,7 @@ router.post('/addUserLike', (req, res) => {
     var sql = $sql.userlike.add;
     var params = req.body;
     console.log(params);
-    conn.query(sql, [params.userID, params.avatarUrl, params.nickname, params.videoID, params.videoUrl, params.videoTitle, params.videoDesc],
+    conn.query(sql, [params.userID, params.avatarUrl, params.nickname, params.videoID, params.videoUrl, params.videoTitle, params.videoDesc, params.videoHolder],
         function (err, result) {
             console.log(err);
             if (err) {

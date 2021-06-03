@@ -108,6 +108,7 @@ export default {
         console.log(this.videoUrl);
         axios
           .post("http://192.168.1.101:3000/api/userlike/addUserLike", {
+            videoHolder: this.userID,
             userID: window.localStorage.getItem("access_token"),
             avatarUrl: window.sessionStorage.getItem("LoginUserAvatar"),
             nickname: window.sessionStorage.getItem("LoginUserNickname"),
@@ -143,7 +144,7 @@ export default {
     },
 
     toComment() {
-       if (localStorage.getItem("access_token") == null) {
+      if (localStorage.getItem("access_token") == null) {
         this.$router.push("/login");
         this.$message.error("请登录，无账号的话请注册哦, 亲");
         return false;
@@ -154,14 +155,14 @@ export default {
           type: "warning",
         });
         return false;
-      } else if ((this.comment.length == 0)) {
+      } else if (this.comment.length == 0) {
         this.$message({
           message: "您还什么都没说",
           type: "warning",
         });
         return false;
       }
-     
+
       axios
         .post("http://192.168.1.101:3000/api/comment/addComment", {
           userID: window.localStorage.getItem("access_token"),
@@ -180,7 +181,7 @@ export default {
             nickname: window.sessionStorage.getItem("LoginUserNickname"),
             avatarUrl: sessionStorage.getItem("LoginUserAvatar"),
             comment: this.comment,
-          }
+          };
           this.comments.unshift(newComment);
           this.comment = "";
         });
@@ -190,10 +191,7 @@ export default {
       if (window.sessionStorage.getItem("userProfile") != null) {
         window.sessionStorage.removeItem("userProfile");
       }
-      window.sessionStorage.setItem(
-          "userProfile",
-          this.userID
-        );
+      window.sessionStorage.setItem("userProfile", this.userID);
       this.$router.push({
         path: "/myVideo",
       });

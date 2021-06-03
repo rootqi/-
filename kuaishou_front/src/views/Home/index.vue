@@ -114,6 +114,7 @@
 
 <script>
 export default {
+  inject: ["reload"],
   data() {
     //顶部
     return {
@@ -151,7 +152,7 @@ export default {
       let str = JSON.stringify(searchObj);
       window.sessionStorage.setItem("searchItem", str);
       if (this.$route.path == "/welcome") {
-        this.$router.go(0);
+        this.reload();
       } else {
         this.$router.push("/welcome");
       }
@@ -163,10 +164,14 @@ export default {
         window.sessionStorage.removeItem("userProfile");
       }
       window.sessionStorage.setItem(
-          "userProfile",
-          localStorage.getItem("access_token")
-        );
-        this.$router.go(0);
+        "userProfile",
+        localStorage.getItem("access_token")
+      );
+      if (this.$route.path == "/myVideo") {
+        this.reload();
+      } else {
+        this.$router.push("/myVideo");
+      }
     },
   },
 };

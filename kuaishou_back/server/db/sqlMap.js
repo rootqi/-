@@ -17,7 +17,7 @@ var sqlMap = {
     },
 
     userlike: {
-        add: 'insert into userlike (userID, avatarUrl, nickname, videoID, videoUrl, videoTitle, videoDesc) values (?,?,?,?,?,?,?)',
+        add: 'insert into userlike (userID, avatarUrl, nickname, videoID, videoUrl, videoTitle, videoDesc, videoHolder) values (?,?,?,?,?,?,?,?)',
         delete: 'delete from userlike',
         select_videoMyLike: 'select * from userlike',
     }
