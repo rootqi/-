@@ -49,7 +49,7 @@
             circle
             @click="toComment"
           ></el-button>
-          <el-button type="info" circle @click="comment = ''">清空</el-button>
+          <el-button type="danger" icon="el-icon-delete" circle @click="comment = ''"></el-button>
         </div>
       </div>
       <br />

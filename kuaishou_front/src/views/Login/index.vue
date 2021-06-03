@@ -23,7 +23,7 @@
         <!-- 用户名 -->
         <el-form-item prop="userID">
           <el-input
-            placeholder="用户名"
+            placeholder="账号"
             prefix-icon="el-icon-user"
             v-model.trim="loginForm.userID"
           ></el-input>
