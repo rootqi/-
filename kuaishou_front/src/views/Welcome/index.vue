@@ -69,7 +69,7 @@ export default {
       return false;
     }else {
        axios
-      .post("http://192.168.1.101:3000/api/user/getUser/", {
+      .post("http://127.0.0.1:3000/api/user/getUser/", {
         userID: localStorage.getItem("access_token"),
       })
       .then((res) => {
@@ -94,7 +94,7 @@ export default {
       console.log(videoSort);
     }
     axios
-      .post("http://192.168.1.101:3000/api/video/getAllVideos/", {
+      .post("http://127.0.0.1:3000/api/video/getAllVideos/", {
         search: this.search,
         videoSort: videoSort,
       })

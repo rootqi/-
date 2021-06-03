@@ -59,7 +59,7 @@ export default {
   data() {
     return {
       limit: 1,
-      uploadUrl: "http://192.168.1.101:3000/api/upload/uploadVideo/",
+      uploadUrl: "http://127.0.0.1:3000/api/upload/uploadVideo/",
       videoUrl: "",
       form: {
         title: "",
@@ -104,7 +104,7 @@ export default {
         s = s + (Math.floor(Math.random() * 100000) % 10).toString();
       }
       axios
-        .post("http://192.168.1.101:3000/api/video/registerVideo/", {
+        .post("http://127.0.0.1:3000/api/video/registerVideo/", {
           userID: window.localStorage.getItem("access_token"),
           videoID: s,
           videoUrl: this.videoUrl,

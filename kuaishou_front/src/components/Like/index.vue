@@ -59,7 +59,7 @@ export default {
   },
 
   mounted(){
-    axios.post("http://192.168.1.101:3000/api/userlike/getMyLike",{
+    axios.post("http://127.0.0.1:3000/api/userlike/getMyLike",{
       userID: window.sessionStorage.getItem("userProfile"),
     }).then((res) => {
       if(res.data.code == 200){

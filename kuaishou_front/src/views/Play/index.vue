@@ -107,7 +107,7 @@ export default {
       } else if (this.ifLike == true) {
         console.log(this.videoUrl);
         axios
-          .post("http://192.168.1.101:3000/api/userlike/addUserLike", {
+          .post("http://127.0.0.1:3000/api/userlike/addUserLike", {
             videoHolder: this.userID,
             userID: window.localStorage.getItem("access_token"),
             avatarUrl: window.sessionStorage.getItem("LoginUserAvatar"),
@@ -128,7 +128,7 @@ export default {
           });
       } else {
         axios
-          .post("http://192.168.1.101:3000/api/userlike/deleteUserLike", {
+          .post("http://127.0.0.1:3000/api/userlike/deleteUserLike", {
             userID: window.localStorage.getItem("access_token"),
             videoID: this.videoID,
           })
@@ -164,7 +164,7 @@ export default {
       }
 
       axios
-        .post("http://192.168.1.101:3000/api/comment/addComment", {
+        .post("http://127.0.0.1:3000/api/comment/addComment", {
           userID: window.localStorage.getItem("access_token"),
           avatarUrl: sessionStorage.getItem("LoginUserAvatar"),
           videoID: this.videoID,
@@ -204,7 +204,7 @@ export default {
       this.ifLike = false;
     } else {
       axios
-        .post("http://192.168.1.101:3000/api/userlike/getIfMyLike", {
+        .post("http://127.0.0.1:3000/api/userlike/getIfMyLike", {
           userID: window.localStorage.getItem("access_token"),
           videoID: this.videoID,
         })
@@ -221,7 +221,7 @@ export default {
   beforeMount() {
     //搜索所有评论内容
     axios
-      .post("http://192.168.1.101:3000/api/comment/getAllComments", {
+      .post("http://127.0.0.1:3000/api/comment/getAllComments", {
         videoID: this.videoID,
       })
       .then((res) => {
@@ -233,7 +233,7 @@ export default {
   mounted() {
     //搜索视频用户数据
     axios
-      .post("http://192.168.1.101:3000/api/user/getUser/", {
+      .post("http://127.0.0.1:3000/api/user/getUser/", {
         userID: this.$route.query.userID,
       })
       .then((res) => {

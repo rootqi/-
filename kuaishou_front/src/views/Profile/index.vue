@@ -50,7 +50,7 @@ export default {
 
   mounted(){
     console.log("userID:"+sessionStorage.getItem("userProfile"));
-    axios.post('http://192.168.1.101:3000/api/user/getUser', {
+    axios.post('http://127.0.0.1:3000/api/user/getUser', {
       userID: window.sessionStorage.getItem("userProfile"),
     }).then((res) => {
       this.avatarUrl = res.data.data.avatarUrl;

@@ -83,7 +83,7 @@ export default {
       } else callback();
     };
     return {
-      uploadUrl: "http://192.168.1.101:3000/api/upload/uploadAvatar/",
+      uploadUrl: "http://127.0.0.1:3000/api/upload/uploadAvatar/",
       avatarUrl: "",
       id: "",
       uploadForm: {
@@ -126,7 +126,7 @@ export default {
         console.log(1111);
         if (valid) {
           axios
-            .post("http://192.168.1.101:3000/api/user/updateUser", {
+            .post("http://127.0.0.1:3000/api/user/updateUser", {
               userID: window.localStorage.getItem("access_token"),
               avatarUrl: this.avatarUrl,
               password: this.uploadForm.apassword,
@@ -146,7 +146,7 @@ export default {
         }
       });
 
-      axios.post("http://192.168.1.101:3000/api/user/updateComment", {
+      axios.post("http://127.0.0.1:3000/api/user/updateComment", {
         userID: window.localStorage.getItem("access_token"),
         avatarUrl: this.avatarUrl,
       }).then((res) => {
@@ -161,7 +161,7 @@ export default {
 
   mounted() {
     axios
-      .post("http://192.168.1.101:3000/api/user/getUser", {
+      .post("http://127.0.0.1:3000/api/user/getUser", {
         userID: window.localStorage.getItem("access_token"),
       })
       .then((res) => {
